@@ -19,19 +19,19 @@ public class TTTServer {
             System.out.println("Opened Server (" + socket + ")");
             while(true) {
                 Socket client = socket.accept();
-                if(this.game.getPlayer1() != null && this.game.getPlayer1().isClosed()) {
+                if(this.game.getPlayer1() == null) {
                     this.game.setPlayer1(client);
                     new ClientHandler(client, 2);
                     System.out.println("Player-1 connected (" + socket + ")");
                     continue;
                 }
-                if(this.game.getPlayer2() != null && this.game.getPlayer2().isClosed()) {
+                if(this.game.getPlayer2() == null) {
                     this.game.setPlayer2(client);
                     new ClientHandler(client, 2);
                     System.out.println("Player-2 connected (" + socket + ")");
                     continue;
                 }
-                socket.close();
+                client.close();
             }
         } catch (IOException e) {
             System.out.println("Failed to start server on port 12345");
