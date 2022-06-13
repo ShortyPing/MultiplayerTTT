@@ -5,21 +5,24 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.File;
 
 public class Game {
 
-    final String title = "Tic-tac-toe";
-    final int width = 1000;
-    final int height = 700;
+    public static final String TITLE = "Tic-tac-toe";
+    public static final int WIDTH = 1000;
+    public static final int HEIGHT = 700;
 
     private JFrame frame;
     private GamePanel panel;
 
     public Game() {
+        GraphicsUtils.registerFont(new File("assets/MeriendaOne.ttf"));
+
         this.panel = new GamePanel();
 
-        this.frame = new JFrame(title);
-        this.frame.setSize(new Dimension(width, height));
+        this.frame = new JFrame(TITLE);
+        this.frame.setSize(WIDTH, HEIGHT);
         this.frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE); // We don't want the program to just exit,
                                                                          // as we need to close the client socket first.
         this.frame.setLocationRelativeTo(null);
@@ -32,20 +35,21 @@ public class Game {
         this.frame.setVisible(true);
     }
 
-    void setUpListeners() {
+    private void setUpListeners() {
         this.frame.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
                 panel.close();
+                System.exit(0);
             }
         });
     }
 
-    void gameLoop() {
+    private void gameLoop() {
         new Thread() {
 
             @Override
-            public void start() {
+            public void run() {
 
                 // Main game loop
                 while (true) {
