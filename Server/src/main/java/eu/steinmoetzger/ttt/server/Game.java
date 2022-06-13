@@ -11,9 +11,11 @@ public class Game {
     private Socket player2;
 
     public Game() {
-        this.server = new TTTServer();
     }
 
+    public void setServer(TTTServer server) {
+        this.server = server;
+    }
 
     public Socket getPlayer1() {
         return player1;
