@@ -18,7 +18,7 @@ public class TTTClient extends Thread {
 
     @Override
     public void run() {
-
+        // TODO Stuff
     }
 
     public Socket getSocket() {
